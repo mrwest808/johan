@@ -1,0 +1,25 @@
+{
+  "name": "johan",
+  "version": "0.0.1",
+  "description": "Random utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrwest808/johan.git"
+  },
+  "author": "Johan West",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrwest808/johan/issues"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "LICENSE",
+    "README.md"
+  ],
+  "homepage": "https://github.com/mrwest808/johan"
+}
