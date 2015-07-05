@@ -1,0 +1,25 @@
+{
+  "parser": "babel-eslint",
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "node": true
+  },
+  "rules": {
+    "curly": [2, "multi"],
+    "func-names": 2,
+    "key-spacing": [2, {
+      "afterColon": true
+    }],
+    "no-underscore-dangle": 0,
+    "no-unused-vars": 1,
+    "quotes": [1, "single"],
+    "space-after-function-name": [2, "never"],
+    "space-in-brackets": [2, "never"],
+    "space-in-parens": [2, "never"],
+    "strict": [2, "global"]
+  }
+}

@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+echo "SYMLINK"
+
+DIR="node_modules"
+NAME="lib"
+LINK="lib"
+
+if [ -d "$DIR" ]; then
+  cd "$DIR" && rm -rf "$NAME" && ln -nsf "../$LINK"
+  echo "\tSymlink created!"
+else
+  echo "\tNo \`$DIR\` folder exists!"
+fi

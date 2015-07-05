@@ -4,7 +4,8 @@
   "description": "Random utilities",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "scripts/build",
+    "test": "scripts/test"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,14 @@
     "LICENSE",
     "README.md"
   ],
-  "homepage": "https://github.com/mrwest808/johan"
+  "homepage": "https://github.com/mrwest808/johan",
+  "devDependencies": {
+    "babel": "^5.6.14",
+    "expect": "^1.6.0",
+    "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "invariant": "^2.1.0",
+    "lodash": "^3.10.0"
+  }
 }

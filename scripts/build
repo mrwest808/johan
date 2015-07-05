@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+sh scripts/_clear
+sh scripts/_symlink
+
+`npm bin`/babel src --compact true --out-dir lib
