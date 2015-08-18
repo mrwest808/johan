@@ -10,10 +10,8 @@ object, optionally initialized with a `constructor` function.
 Depending on whether a `constructor` parameter was passed to the wrapping
 function, the returned function can be called to ..
 
-- .. instantiate an object with the specified prototype and call the constructor
-  function.
-- .. instantiate an object with the specified prototype and copy the
-   `properties` as own enumerable properties.
+- .. instantiate an object with the specified prototype and call the constructor function.
+- .. instantiate an object with the specified prototype and copy the `properties` as own enumerable properties.
 
 In both scenarios, the new object instance is returned.
 
