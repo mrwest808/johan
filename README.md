@@ -2,7 +2,7 @@
 
 ## object
 
-### .create(prototype <obj> [, constructor <func>])
+### .create(prototype: object [, constructor: function])
 
 Returns a function that creates a new object linked to the specified `prototype`
 object, optionally initialized with a `constructor` function.
@@ -64,7 +64,7 @@ ncaa.propertyIsEnumerable('type'); // -> true
 
 ## array
 
-### .split(arr <arr> [, n <num>])
+### .split(arr: array [, n: number])
 
 Split an array into sub arrays of `n` elements, where `n` is a positive number
 greater than 1.
