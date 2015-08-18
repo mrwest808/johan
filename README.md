@@ -4,6 +4,7 @@
 
 ### .create(prototype <object> [, constructor <function>])
 
+
 Returns a function that creates a new object linked to the specified `prototype`
 object, optionally initialized with a `constructor` function.
 
