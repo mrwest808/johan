@@ -1,13 +1,14 @@
-import create from 'lib/object/create';
+const {create} = require('../../').object;
+
 import expect from 'expect';
 
-describe('object/create', function() {
-  it('should export a function', function() {
+describe('object.create', () => {
+  it('should export a function', () => {
     expect(create).toBeA('function');
   });
 
-  describe('called without constructor', function() {
-    it('should correctly return enumerable properties', function() {
+  describe('called without constructor', () => {
+    it('should correctly return enumerable properties', () => {
       const SamplePrototype = {c: 3};
       const properties = {a: 1, b: 2};
 
@@ -26,8 +27,8 @@ describe('object/create', function() {
     });
   });
 
-  describe('called with constructor', function() {
-    it('should correctly return constructed enumerable properties', function() {
+  describe('called with constructor', () => {
+    it('should correctly return constructed enumerable properties', () => {
       const SamplePrototype = {
         greet: function() {
           return `Hello ${this.name}!`;

@@ -1,5 +1,3 @@
-'use strict';
-
 import inv from 'invariant';
 import assign from 'lodash/object/assign';
 import isObj from 'lodash/lang/isPlainObject';
