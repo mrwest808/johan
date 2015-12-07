@@ -1,6 +1,7 @@
-const {split} = require('../../').array;
-
 import expect from 'expect';
+
+const { split } = require('../../').array;
+
 
 describe('array.split', () => {
   it('should export a function', () => {

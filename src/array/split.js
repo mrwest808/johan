@@ -1,7 +1,6 @@
 import inv from 'invariant';
-import chunk from 'lodash/array/chunk';
-import isArr from 'lodash/lang/isArray';
-import isNum from 'lodash/lang/isNumber';
+import chunk from 'lodash.chunk';
+import isNum from 'lodash.isnumber';
 
 /**
  * Split an array into sub arrays of `n` elements.
@@ -11,7 +10,7 @@ import isNum from 'lodash/lang/isNumber';
  * @return {array}
  */
 export default function split(arr, n) {
-  inv(isArr(arr), 'Expecting `arr` to be an array');
+  inv(Array.isArray(arr), 'Expecting `arr` to be an array');
   inv(isNum(n) && n > 1, 'Expecting `n` to be a positive number (> 1)');
 
   return chunk(arr, n);
