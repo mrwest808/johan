@@ -1,3 +1,0 @@
-#!/bin/sh -e
-
-`npm bin`/mocha --recursive --reporter spec --compilers js:babel/register

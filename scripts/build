@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-sh scripts/_clear
-
-`npm bin`/babel src --compact true --out-dir lib
