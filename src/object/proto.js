@@ -6,38 +6,51 @@ import create from './create';
 
 
 /**
+ * Assign one or more objects.
+ *
+ * @param  {...Object} ...objects
+ * @return {Object}
+ */
+function combine(...objects) {
+  inv(Array.isArray(objects) && objects.length > 0,
+    'You must pass at least one object to instantiate'
+  );
+
+  inv(objects.every(isObj),
+    'Expecting only plain objects as parameter(s)'
+  );
+
+  return assign({}, ...objects);
+}
+
+
+/**
  * Create an instantiatable object inheriting from the given prototype object.
  *
  * @param  {Object}   prototype [object to use as prototype]
- * @param  {Function} validate  [optional, for validating props]
+ * @param  {Function} factory   [factory function, optional]
  * @return {Function}
  */
-export default function createProto(prototype = null, validate) {
-  if (validate) {
-    inv(typeof validate === 'function',
-      'Invalid `validate` parameter, expecting function'
+export default function createProto(prototype = null, factory) {
+  if (factory) {
+    inv(typeof factory === 'function',
+      'Invalid `factory` parameter, expecting function'
     );
   }
 
   /**
-   * Create an object instance by passing one or more objects to the function,
-   * if `validate` is set it will be run on the object(s) to validate the
-   * properties.
+   * Create an object instance by either passing one or more objects, or
+   * parameters expected by the `factory` function if specified.
    *
-   * @param  {...obj} ...objects
-   * @return {obj}
+   * @param  {...Any} ...args
+   * @return {Object}
    */
-  return function instantiate(...objects) {
-    inv(Array.isArray(objects) && objects.length > 0,
-      'You must pass at least one object to instantiate'
-    );
+  return function instantiate(...args) {
+    const enumerable = factory ? factory(...args) : combine(...args);
 
-    inv(objects.every(isObj),
-      'Expecting objects as parameter(s)'
+    inv(isObj(enumerable),
+      'Expecting `enumerable` to be a plain object, check `factory` function'
     );
-
-    const enumerable = assign({}, ...objects);
-    if (validate) validate(enumerable);
 
     return create(prototype, enumerable);
   }

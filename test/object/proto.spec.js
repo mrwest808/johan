@@ -11,7 +11,7 @@ describe('object.proto', () => {
   const Prototype = { c: 3 };
   const enumerables = { a: 1, b: 2 };
 
-  describe('called without validate function', () => {
+  describe('called without factory function', () => {
     const Sample = proto(Prototype);
     const obj = Sample(enumerables);
 
@@ -23,48 +23,51 @@ describe('object.proto', () => {
       expect(obj.b).toBe(2);
     });
 
-    it('should return expecting non-enumerable properties', () => {
+    it('should return expected non-enumerable properties', () => {
       expect(obj.propertyIsEnumerable('c')).toBe(false);
       expect(obj.c).toBe(3);
     });
   });
 
-  describe('called with validate function', () => {
-    const expected = 'Expecting `a` prop to be 2';
-    const validate = obj => {
-      if (obj.a !== 2) {
-        throw new Error(expected);
-      }
-    };
+  describe('called with factory function', () => {
+    describe('simple example', () => {
+      const Sample = proto(Prototype, (a, b) => ({ a, b }));
+      const obj = Sample(1, 2);
 
-    const goodProps = { a: 2 };
-    const badProps = { a: 1 };
+      it('should return expected enumerable properties', () => {
+        expect(obj.propertyIsEnumerable('a')).toBe(true);
+        expect(obj.propertyIsEnumerable('b')).toBe(true);
 
-    const Sample = proto(Prototype, validate);
-
-    describe('called with good parameter(s)', () => {
-      let obj;
-      const instantiation = () => {
-        obj = Sample(goodProps);
-      };
-
-      it('should not throw', () => {
-        expect(instantiation).toNotThrow();
+        expect(obj.a).toBe(1);
+        expect(obj.b).toBe(2);
       });
 
-      it('should return a good instance', () => {
-        expect(obj.a).toBe(2);
+      it('should return expected non-enumerable properties', () => {
+        expect(obj.propertyIsEnumerable('c')).toBe(false);
+        expect(obj.c).toBe(3);
       });
     });
 
-    describe('called with bad parameter(s)', () => {
-      let obj;
-      const instantiation = () => {
-        obj = Sample(badProps);
-      };
+    describe('with validation in factory function', () => {
+      const expectedError = 'Expecting `a` to be less than 10';
+      const Sample = proto(Prototype, (a, b) => {
+        if (a > 10) {
+          throw new Error(expectedError);
+        }
 
-      it('should throw', () => {
-        expect(instantiation).toThrow(Error);
+        return { a, b };
+      });
+
+      describe('good parameters', () => {
+        it('should not throw', () => {
+          expect(() => Sample(5, 6)).toNotThrow();
+        });
+      });
+
+      describe('bad parameters', () => {
+        it('should throw', () => {
+          expect(() => Sample(11, 12)).toThrow(Error, expectedError);
+        });
       });
     });
   });
