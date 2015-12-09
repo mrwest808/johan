@@ -3,10 +3,10 @@
 
 ## object
 
-### .proto(prototype (object) [, validate (function)])
+### .proto(prototype (object) [, factory (function)])
 
-Returns a function that creates a new object linked to the specified `prototype`
-object, optionally validated on instantiation with a `validate` function.
+Create an instantiatable object linked to the supplied `prototype` object. Can
+be used with or without a `factory` function.
 
 **Example**
 
@@ -21,15 +21,38 @@ const Walking = {
 };
 
 const Speaking = {
-  greet() {
+  speak() {
     return `Hello my name is ${this.name}`;
   }
 };
 
-const Person = proto(assign({}, Speaking, Walking));
 
-const john = Person({ name: 'John' });
-const jane = Person({ name: 'Jane' });
+const PersonProto = assign({}, Speaking, Walking);
+
+
+/**
+ * Without `factory` function
+ */
+const PersonNoFactory = proto(PersonProto);
+
+/**
+ * With `factory` function
+ */
+const PersonWithFactory = proto(PersonProto, name => {
+  if (typeof name !== 'string') {
+    throw new Error('Expecting `name` to be a string');
+  }
+
+  return { name };
+});
+
+
+const john = PersonNoFactory({ name: 'John' });
+// or -> ... = PersonWithFactory('John');
+
+const jane = PersonNoFactory({ name: 'Jane' });
+// or -> ... = PersonWithFactory('Jane');
+
 
 john.greet(); // -> Hello, my name is John!
 jane.greet(); // -> Hello, my name is Jane!
@@ -40,6 +63,7 @@ jane.move;                         // -> function greet()
 jane.propertyIsEnumerable('move'); // -> false
 jane.propertyIsEnumerable('name'); // -> true
 ```
+
 
 ## array
 
