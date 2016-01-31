@@ -54,12 +54,12 @@ const jane = PersonNoFactory({ name: 'Jane' });
 // or -> ... = PersonWithFactory('Jane');
 
 
-john.greet(); // -> Hello, my name is John!
-jane.greet(); // -> Hello, my name is Jane!
+john.speak(); // -> Hello, my name is John!
+jane.speak(); // -> Hello, my name is Jane!
 
 jane.move(); // -> Walking...
 
-jane.move;                         // -> function greet()
+jane.move;                         // -> function move()
 jane.propertyIsEnumerable('move'); // -> false
 jane.propertyIsEnumerable('name'); // -> true
 ```
